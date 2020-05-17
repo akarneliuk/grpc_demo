@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 # Modules
-import openconfig_interfaces_pb2
+import bin.openconfig_interfaces_pb2 as openconfig_interfaces_pb2
 import sys
 
 # Variable
+path_messages = 'messages'
 intend = {
             'interfaces': {
                 'interface': [
@@ -89,5 +90,5 @@ if __name__ == '__main__':
 
     oc_if = build_protobuf(intend)
 
-    with open(sys.argv[1], "wb") as f:
+    with open(f'{path_messages}/{sys.argv[1]}', "wb") as f:
         f.write(oc_if.SerializeToString())

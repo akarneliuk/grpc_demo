@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
 # Modules
-import openconfig_interfaces_pb2
+import bin.openconfig_interfaces_pb2 as openconfig_interfaces_pb2
 import sys
+
+# Variable
+path_messages = 'messages'
 
 # User-defined functions
 def parse_protobuf(obj):
@@ -46,7 +49,7 @@ if __name__ == '__main__':
 
     oc_if = openconfig_interfaces_pb2.Interfaces()
 
-    with open(sys.argv[1], "rb") as f:
+    with open(f'{path_messages}/{sys.argv[1]}', "rb") as f:
         oc_if.ParseFromString(f.read())
 
     parsed_data = parse_protobuf(oc_if)
