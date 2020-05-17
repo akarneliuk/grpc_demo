@@ -10,10 +10,9 @@ path_messages = 'messages'
 # User-defined functions
 def parse_protobuf(obj):
     temp_dict = {}
-    temp_dict['interface'] = []
+    temp_dict.update({'interfaces': {'interface': []}})
 
     for interface_entry in obj.interface:
-
         temp_cont = {}
         temp_cont['name'] = interface_entry.name
         temp_cont['config'] = {}
@@ -26,7 +25,6 @@ def parse_protobuf(obj):
 
         for siface_entry in interface_entry.subinterfaces.subinterface:
             temp_sub_cont = {}
-
             temp_sub_cont['index'] = siface_entry.index
             temp_sub_cont['config'] = {}
             temp_sub_cont['config']['index'] = siface_entry.config.index
@@ -36,7 +34,7 @@ def parse_protobuf(obj):
             temp_cont['config']['subinterfaces']['subinterface'].append(temp_sub_cont)
 
 
-        temp_dict['interface'].append(temp_cont)
+        temp_dict['interfaces']['interface'].append(temp_cont)
 
     return temp_dict
 

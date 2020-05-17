@@ -13,6 +13,9 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.1.2`:
+- Minor bug fixing in `read_protobuf.py`.
+
 Release `0.1.1`:
 - Restructured the files hierarchy by adding `bin` and `messages` directories.
 - Modified the `create_protobuf.py` and `read_protobuf.py` to work with new files' structure.
