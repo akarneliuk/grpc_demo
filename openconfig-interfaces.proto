@@ -1,0 +1,53 @@
+// Test of the encoding of openconfig-interfaces into Protobuf
+syntax = "proto3";
+
+package openconfig_interfaces;
+
+// Custom Data Types
+enum InterfaceType {
+    ethernetCsmcsd = 0;
+    softwareLooback = 1;
+}
+
+// Main Data Structure
+message Interfaces {
+    message Interface {
+        string name = 1;
+        
+        message Config {
+            string name = 1;
+            InterfaceType type = 2;
+            uint64 mtu = 3;
+            bool loopback_mode = 4;
+            string description = 5;
+            bool enabled = 6;
+        }
+        Config config = 2;
+
+        message HoldTime {
+            message Config {
+                uint64 up = 1;
+                uint64 down = 2;
+            }
+            Config config = 1;
+        }
+        HoldTime holdtime = 3;
+
+        message Subinterfaces {
+            message Subinterface {
+                uint64 index = 1;
+
+                message Config {
+                    uint64 index = 1;
+                    string description = 2;
+                    bool enabled = 3;
+                }
+                Config config = 2;
+
+            }
+            repeated Subinterface subinterface = 2;
+        }
+        Subinterfaces subinterfaces = 4;
+    }
+    repeated Interface interface = 1; 
+}

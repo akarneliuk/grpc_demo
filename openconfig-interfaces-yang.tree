@@ -1,0 +1,272 @@
+module: openconfig-interfaces
+  +--rw interfaces
+     +--rw interface* [name]
+        +--rw name                   -> ../config/name
+        +--rw config
+        |  +--rw name?            string
+        |  +--rw type             identityref
+        |  +--rw mtu?             uint16
+        |  +--rw loopback-mode?   boolean
+        |  +--rw description?     string
+        |  +--rw enabled?         boolean
+        |  +--rw oc-vlan:tpid?    identityref
+        +--rw hold-time
+        |  +--rw config
+        |     +--rw up?     uint32
+        |     +--rw down?   uint32
+        +--rw subinterfaces
+        |  +--rw subinterface* [index]
+        |     +--rw index           -> ../config/index
+        |     +--rw config
+        |     |  +--rw index?         uint32
+        |     |  +--rw description?   string
+        |     |  +--rw enabled?       boolean
+        |     +--rw oc-vlan:vlan
+        |     |  +--rw oc-vlan:config
+        |     |  |  x--rw oc-vlan:vlan-id?   union
+        |     |  +--rw oc-vlan:match
+        |     |  |  +--rw oc-vlan:single-tagged
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |  |  +--rw oc-vlan:vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  |  +--ro oc-vlan:state
+        |     |  |  |     +--ro oc-vlan:vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:single-tagged-list
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |  |  +--rw oc-vlan:vlan-ids*   oc-vlan-types:vlan-id
+        |     |  |  |  +--ro oc-vlan:state
+        |     |  |  |     +--ro oc-vlan:vlan-ids*   oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:single-tagged-range
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |     +--rw oc-vlan:low-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:high-vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:double-tagged
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |     +--rw oc-vlan:inner-vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:outer-vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:double-tagged-inner-list
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |     +--rw oc-vlan:inner-vlan-ids*   oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:outer-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:double-tagged-outer-list
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |     +--rw oc-vlan:inner-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:outer-vlan-ids*   oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:double-tagged-inner-range
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |     +--rw oc-vlan:inner-low-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:inner-high-vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:outer-vlan-id*        oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:double-tagged-outer-range
+        |     |  |  |  +--rw oc-vlan:config
+        |     |  |  |     +--rw oc-vlan:inner-vlan-id?        oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:outer-low-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |  |     +--rw oc-vlan:outer-high-vlan-id?   oc-vlan-types:vlan-id
+        |     |  |  +--rw oc-vlan:double-tagged-inner-outer-range
+        |     |  |     +--rw oc-vlan:config
+        |     |  |        +--rw oc-vlan:inner-low-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |        +--rw oc-vlan:inner-high-vlan-id?   oc-vlan-types:vlan-id
+        |     |  |        +--rw oc-vlan:outer-low-vlan-id?    oc-vlan-types:vlan-id
+        |     |  |        +--rw oc-vlan:outer-high-vlan-id?   oc-vlan-types:vlan-id
+        |     |  +--rw oc-vlan:ingress-mapping
+        |     |  |  +--rw oc-vlan:config
+        |     |  |     +--rw oc-vlan:vlan-stack-action?   oc-vlan-types:vlan-stack-action
+        |     |  |     +--rw oc-vlan:vlan-id?             oc-vlan-types:vlan-id
+        |     |  |     +--rw oc-vlan:tpid?                identityref
+        |     |  +--rw oc-vlan:egress-mapping
+        |     |     +--rw oc-vlan:config
+        |     |        +--rw oc-vlan:vlan-stack-action?   oc-vlan-types:vlan-stack-action
+        |     |        +--rw oc-vlan:vlan-id?             oc-vlan-types:vlan-id
+        |     |        +--rw oc-vlan:tpid?                identityref
+        |     +--rw oc-ip:ipv4
+        |     |  +--rw oc-ip:addresses
+        |     |  |  +--rw oc-ip:address* [ip]
+        |     |  |     +--rw oc-ip:ip        -> ../config/ip
+        |     |  |     +--rw oc-ip:config
+        |     |  |     |  +--rw oc-ip:ip?              oc-inet:ipv4-address
+        |     |  |     |  +--rw oc-ip:prefix-length?   uint8
+        |     |  |     +--rw oc-ip:vrrp
+        |     |  |        +--rw oc-ip:vrrp-group* [virtual-router-id]
+        |     |  |           +--rw oc-ip:virtual-router-id     -> ../config/virtual-router-id
+        |     |  |           +--rw oc-ip:config
+        |     |  |           |  +--rw oc-ip:virtual-router-id?        uint8
+        |     |  |           |  +--rw oc-ip:virtual-address*          oc-inet:ip-address
+        |     |  |           |  +--rw oc-ip:priority?                 uint8
+        |     |  |           |  +--rw oc-ip:preempt?                  boolean
+        |     |  |           |  +--rw oc-ip:preempt-delay?            uint16
+        |     |  |           |  +--rw oc-ip:accept-mode?              boolean
+        |     |  |           |  +--rw oc-ip:advertisement-interval?   uint16
+        |     |  |           +--rw oc-ip:interface-tracking
+        |     |  |              +--rw oc-ip:config
+        |     |  |              |  +--rw oc-ip:track-interface*      -> /oc-if:interfaces/interface/name
+        |     |  |              |  +--rw oc-ip:priority-decrement?   uint8
+        |     |  |              +--ro oc-ip:state
+        |     |  |                 +--ro oc-ip:track-interface*      -> /oc-if:interfaces/interface/name
+        |     |  |                 +--ro oc-ip:priority-decrement?   uint8
+        |     |  +--rw oc-ip:proxy-arp
+        |     |  |  +--rw oc-ip:config
+        |     |  |     +--rw oc-ip:mode?   enumeration
+        |     |  +--rw oc-ip:neighbors
+        |     |  |  +--rw oc-ip:neighbor* [ip]
+        |     |  |     +--rw oc-ip:ip        -> ../config/ip
+        |     |  |     +--rw oc-ip:config
+        |     |  |        +--rw oc-ip:ip?                   oc-inet:ipv4-address
+        |     |  |        +--rw oc-ip:link-layer-address    oc-yang:phys-address
+        |     |  +--rw oc-ip:unnumbered
+        |     |  |  +--rw oc-ip:config
+        |     |  |  |  +--rw oc-ip:enabled?   boolean
+        |     |  |  +--rw oc-ip:interface-ref
+        |     |  |     +--rw oc-ip:config
+        |     |  |        +--rw oc-ip:interface?      -> /oc-if:interfaces/interface/name
+        |     |  |        +--rw oc-ip:subinterface?   -> /oc-if:interfaces/interface[oc-if:name=current()/../interface]/subinterfaces/subinterface/index
+        |     +--rw oc-ip:ipv6
+        |        +--rw oc-ip:addresses
+        |        |  +--rw oc-ip:address* [ip]
+        |        |     +--rw oc-ip:ip        -> ../config/ip
+        |        |     +--rw oc-ip:config
+        |        |     |  +--rw oc-ip:ip?              oc-inet:ipv6-address
+        |        |     |  +--rw oc-ip:prefix-length    uint8
+        |        |     +--rw oc-ip:vrrp
+        |        |        +--rw oc-ip:vrrp-group* [virtual-router-id]
+        |        |           +--rw oc-ip:virtual-router-id     -> ../config/virtual-router-id
+        |        |           +--rw oc-ip:config
+        |        |           |  +--rw oc-ip:virtual-router-id?        uint8
+        |        |           |  +--rw oc-ip:virtual-address*          oc-inet:ip-address
+        |        |           |  +--rw oc-ip:priority?                 uint8
+        |        |           |  +--rw oc-ip:preempt?                  boolean
+        |        |           |  +--rw oc-ip:preempt-delay?            uint16
+        |        |           |  +--rw oc-ip:accept-mode?              boolean
+        |        |           |  +--rw oc-ip:advertisement-interval?   uint16
+        |        |           |  +--rw oc-ip:virtual-link-local?       oc-inet:ip-address
+        |        |           +--rw oc-ip:interface-tracking
+        |        |              +--rw oc-ip:config
+        |        |              |  +--rw oc-ip:track-interface*      -> /oc-if:interfaces/interface/name
+        |        |              |  +--rw oc-ip:priority-decrement?   uint8
+        |        |              +--ro oc-ip:state
+        |        |                 +--ro oc-ip:track-interface*      -> /oc-if:interfaces/interface/name
+        |        |                 +--ro oc-ip:priority-decrement?   uint8
+        |        +--rw oc-ip:router-advertisement
+        |        |  +--rw oc-ip:config
+        |        |     +--rw oc-ip:interval?   uint32
+        |        |     +--rw oc-ip:lifetime?   uint32
+        |        |     +--rw oc-ip:suppress?   boolean
+        |        +--rw oc-ip:neighbors
+        |        |  +--rw oc-ip:neighbor* [ip]
+        |        |     +--rw oc-ip:ip        -> ../config/ip
+        |        |     +--rw oc-ip:config
+        |        |        +--rw oc-ip:ip?                   oc-inet:ipv6-address
+        |        |        +--rw oc-ip:link-layer-address    oc-yang:phys-address
+        |        +--rw oc-ip:unnumbered
+        |        |  +--rw oc-ip:config
+        |        |  |  +--rw oc-ip:enabled?   boolean
+        |        |  +--rw oc-ip:interface-ref
+        |        |     +--rw oc-ip:config
+        |        |        +--rw oc-ip:interface?      -> /oc-if:interfaces/interface/name
+        |        |        +--rw oc-ip:subinterface?   -> /oc-if:interfaces/interface[oc-if:name=current()/../interface]/subinterfaces/subinterface/index
+        |        +--rw oc-ip:config
+        |           +--rw oc-ip:enabled?                     boolean
+        |           +--rw oc-ip:mtu?                         uint32
+        |           +--rw oc-ip:dup-addr-detect-transmits?   uint32
+        |           +--rw oc-ip:dhcp-client?                 boolean
+        +--rw oc-eth:ethernet
+        |  +--rw oc-eth:config
+        |  |  +--rw oc-eth:mac-address?           oc-yang:mac-address
+        |  |  +--rw oc-eth:auto-negotiate?        boolean
+        |  |  +--rw oc-eth:duplex-mode?           enumeration
+        |  |  +--rw oc-eth:port-speed?            identityref
+        |  |  +--rw oc-eth:enable-flow-control?   boolean
+        |  +--rw oc-vlan:switched-vlan
+        |     +--rw oc-vlan:config
+        |        +--rw oc-vlan:interface-mode?   oc-vlan-types:vlan-mode-type
+        |        +--rw oc-vlan:native-vlan?      oc-vlan-types:vlan-id
+        |        +--rw oc-vlan:access-vlan?      oc-vlan-types:vlan-id
+        |        +--rw oc-vlan:trunk-vlans*      union
+        +--rw oc-vlan:routed-vlan
+           +--rw oc-vlan:config
+           |  +--rw oc-vlan:vlan?   union
+           +--rw oc-ip:ipv4
+           |  +--rw oc-ip:addresses
+           |  |  +--rw oc-ip:address* [ip]
+           |  |     +--rw oc-ip:ip        -> ../config/ip
+           |  |     +--rw oc-ip:config
+           |  |     |  +--rw oc-ip:ip?              oc-inet:ipv4-address
+           |  |     |  +--rw oc-ip:prefix-length?   uint8
+           |  |     +--rw oc-ip:vrrp
+           |  |        +--rw oc-ip:vrrp-group* [virtual-router-id]
+           |  |           +--rw oc-ip:virtual-router-id     -> ../config/virtual-router-id
+           |  |           +--rw oc-ip:config
+           |  |           |  +--rw oc-ip:virtual-router-id?        uint8
+           |  |           |  +--rw oc-ip:virtual-address*          oc-inet:ip-address
+           |  |           |  +--rw oc-ip:priority?                 uint8
+           |  |           |  +--rw oc-ip:preempt?                  boolean
+           |  |           |  +--rw oc-ip:preempt-delay?            uint16
+           |  |           |  +--rw oc-ip:accept-mode?              boolean
+           |  |           |  +--rw oc-ip:advertisement-interval?   uint16
+           |  |           +--rw oc-ip:interface-tracking
+           |  |              +--rw oc-ip:config
+           |  |                 +--rw oc-ip:track-interface*      -> /oc-if:interfaces/interface/name
+           |  |                 +--rw oc-ip:priority-decrement?   uint8
+           |  +--rw oc-ip:proxy-arp
+           |  |  +--rw oc-ip:config
+           |  |     +--rw oc-ip:mode?   enumeration
+           |  +--rw oc-ip:neighbors
+           |  |  +--rw oc-ip:neighbor* [ip]
+           |  |     +--rw oc-ip:ip        -> ../config/ip
+           |  |     +--rw oc-ip:config
+           |  |        +--rw oc-ip:ip?                   oc-inet:ipv4-address
+           |  |        +--rw oc-ip:link-layer-address    oc-yang:phys-address
+           |  +--rw oc-ip:unnumbered
+           |  |  +--rw oc-ip:config
+           |  |  |  +--rw oc-ip:enabled?   boolean
+           |  |  +--rw oc-ip:interface-ref
+           |  |     +--rw oc-ip:config
+           |  |        +--rw oc-ip:interface?      -> /oc-if:interfaces/interface/name
+           |  |        +--rw oc-ip:subinterface?   -> /oc-if:interfaces/interface[oc-if:name=current()/../interface]/subinterfaces/subinterface/index
+           |  +--rw oc-ip:config
+           |     +--rw oc-ip:enabled?       boolean
+           |     +--rw oc-ip:mtu?           uint16
+           +--rw oc-ip:ipv6
+              +--rw oc-ip:addresses
+              |  +--rw oc-ip:address* [ip]
+              |     +--rw oc-ip:ip        -> ../config/ip
+              |     +--rw oc-ip:config
+              |     |  +--rw oc-ip:ip?              oc-inet:ipv6-address
+              |     |  +--rw oc-ip:prefix-length    uint8
+              |     +--rw oc-ip:vrrp
+              |        +--rw oc-ip:vrrp-group* [virtual-router-id]
+              |           +--rw oc-ip:virtual-router-id     -> ../config/virtual-router-id
+              |           +--rw oc-ip:config
+              |           |  +--rw oc-ip:virtual-router-id?        uint8
+              |           |  +--rw oc-ip:virtual-address*          oc-inet:ip-address
+              |           |  +--rw oc-ip:priority?                 uint8
+              |           |  +--rw oc-ip:preempt?                  boolean
+              |           |  +--rw oc-ip:preempt-delay?            uint16
+              |           |  +--rw oc-ip:accept-mode?              boolean
+              |           |  +--rw oc-ip:advertisement-interval?   uint16
+              |           |  +--rw oc-ip:virtual-link-local?       oc-inet:ip-address
+              |           +--rw oc-ip:interface-tracking
+              |              +--rw oc-ip:config
+              |                 +--rw oc-ip:track-interface*      -> /oc-if:interfaces/interface/name
+              |                 +--rw oc-ip:priority-decrement?   uint8
+              +--rw oc-ip:router-advertisement
+              |  +--rw oc-ip:config
+              |     +--rw oc-ip:interval?   uint32
+              |     +--rw oc-ip:lifetime?   uint32
+              |     +--rw oc-ip:suppress?   boolean
+              +--rw oc-ip:neighbors
+              |  +--rw oc-ip:neighbor* [ip]
+              |     +--rw oc-ip:ip        -> ../config/ip
+              |     +--rw oc-ip:config
+              |        +--rw oc-ip:ip?                   oc-inet:ipv6-address
+              |        +--rw oc-ip:link-layer-address    oc-yang:phys-address
+              +--rw oc-ip:unnumbered
+              |  +--rw oc-ip:config
+              |  |  +--rw oc-ip:enabled?   boolean
+              |  +--rw oc-ip:interface-ref
+              |     +--rw oc-ip:config
+              |        +--rw oc-ip:interface?      -> /oc-if:interfaces/interface/name
+              |        +--rw oc-ip:subinterface?   -> /oc-if:interfaces/interface[oc-if:name=current()/../interface]/subinterfaces/subinterface/index
+              +--rw oc-ip:config
+                 +--rw oc-ip:enabled?                     boolean
+                 +--rw oc-ip:mtu?                         uint32
+                 +--rw oc-ip:dup-addr-detect-transmits?   uint32
+                 +--rw oc-ip:dhcp-client?                 boolean
