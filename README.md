@@ -13,6 +13,9 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.2.0`:
+- Modified the `requirements.txt` to include the `grpcio` and `grpcio-tools`.
+
 Release `0.1.2`:
 - Minor bug fixing in `read_protobuf.py`.
 
