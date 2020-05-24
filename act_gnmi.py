@@ -11,12 +11,18 @@ import sys
 # Variables
 info_to_collect = ['openconfig-interfaces:interfaces']
 target_devices = [
-                   {
-                     'ip_address': '192.168.100.62',
-                     'port': 6030,
-                     'username': 'aaa',
-                     'password': 'aaa'
-                   }
+                    {
+                        'ip_address': '169.254.255.64',
+                        'port': 57400,
+                        'username': 'admin',
+                        'password': 'admin'
+                    },
+                    {
+                        'ip_address': '192.168.100.62',
+                        'port': 6030,
+                        'username': 'aaa',
+                        'password': 'aaa'
+                    }
                  ]
 
 
@@ -58,7 +64,7 @@ if __name__ == '__main__':
 
             intent_path = gnmi_path_generator(itc_entry)
 
-            gnmi_message_request = GetRequest(path=[intent_path], type=0, encoding=4)
+            gnmi_message_request = GetRequest(path=[intent_path], type=0, encoding=0)
             gnmi_message_response = collected_data = gnmi_interface.Get(gnmi_message_request, metadata=metadata)
 
             print(gnmi_message_response)

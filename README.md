@@ -13,6 +13,10 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.2.3`:
+- Minor bug fixing with the encodign, as Nokia doesn't support `JSON_IETF`.
+- Added the devices configuration folder `nf_config`.
+
 Release `0.2.2`:
 - Minor bug fixing with the `gnmi_path_generator` function.
 
