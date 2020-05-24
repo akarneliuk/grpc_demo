@@ -25,7 +25,6 @@ def gnmi_path_generator(path_in_question):
     gnmi_path = Path()
 
     path_elements = path_in_question.split('/')
-    print(path_elements)
 
     for pe_entry in path_elements:
         if not re.match('.+?:.+?', pe_entry) and len(path_elements) == 1:
@@ -41,8 +40,6 @@ def gnmi_path_generator(path_in_question):
         else:
             gnmi_path.elem.add(name=pe_entry)
 
-    print(gnmi_path)
-
     return gnmi_path
 
 
@@ -57,6 +54,8 @@ if __name__ == '__main__':
         gnmi_interface = gNMIStub(grpc_connection)
 
         for itc_entry in info_to_collect:
+            print(f'Collecting the {itc_entry} data from {td_entry["ip_address"]} over gNMI...')
+
             intent_path = gnmi_path_generator(itc_entry)
 
             gnmi_message_request = GetRequest(path=[intent_path], type=0, encoding=4)
