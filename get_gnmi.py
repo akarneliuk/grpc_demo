@@ -10,7 +10,7 @@ import json
 
 
 # Variables
-info_to_collect = ['openconfig-interfaces:interfaces']
+info_to_collect = ['openconfig-interfaces:interfaces/interface[name=Ethernet2]']
 target_devices = [
                     {
                         'ip_address': '192.168.100.62',
@@ -70,8 +70,3 @@ if __name__ == '__main__':
 
             print(gnmi_message_response)
 
-            print(f'Getting OpenConfig YANG data out of the received Protobuf and coverting it into JSON...\n\n')
-            result_dict = {}
-            result_dict[itc_entry] = json.loads(gnmi_message_response.notification[0].update[0].val.json_ietf_val)
-
-            print(result_dict)

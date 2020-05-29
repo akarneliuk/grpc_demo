@@ -13,6 +13,10 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.3.0`:
+- The file `act_gnmi.py` is renamed to `get_gnmi.py`.
+- The new file `set_gnmi.py` is created to perform the configuration of the network elements via gRPC transport with gNMI specification and OpenConfig YANG modules.
+
 Release `0.2.3`:
 - Minor bug fixing with the encodign, as Nokia doesn't support `JSON_IETF`.
 - Added the devices configuration folder `nf_config`.
