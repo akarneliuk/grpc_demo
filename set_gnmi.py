@@ -10,18 +10,15 @@ import json
 
 
 # Variables
-info_to_collect = ['openconfig-interfaces:interfaces/interface[name=Ethernet2]']
-target_devices = [
-                    {
-                        'ip_address': '192.168.100.62',
-                        'port': 6030,
-                        'username': 'aaa',
-                        'password': 'aaa'
-                    }
-                 ]
+path = {'inventory': 'inventory/inventory.json', 'network_functions': 'inventory/network_functions'}
 
 
 # User-defined functions
+def json_to_dict(path):
+    with open(path, 'r') as f:
+        return json.loads(f.read())
+
+
 def gnmi_path_generator(path_in_question):
     gnmi_path = Path()
 
@@ -46,7 +43,9 @@ def gnmi_path_generator(path_in_question):
 
 # Body
 if __name__ == '__main__':
-    for td_entry in target_devices:
+    inventory = json_to_dict(path['inventory']) 
+
+    for td_entry in inventory['network_functions']:
         metadata = [('username', td_entry['username']), ('password', td_entry['password'])]
 
         grpc_connection = grpc.insecure_channel(f'{td_entry["ip_address"]}:{td_entry["port"]}', metadata)
@@ -54,15 +53,19 @@ if __name__ == '__main__':
 
         gnmi_interface = gNMIStub(grpc_connection)
 
-        for itc_entry in info_to_collect:
+        device_data = json_to_dict(f'{path["network_functions"]}/{td_entry["hostname"]}.json')
+
+        gnmi_update_message = []
+        for itc_entry in device_data['intent_config']:
             print(f'Setting data for the {itc_entry} data from {td_entry["ip_address"]} over gNMI...\n\n')
 
-            intent_path = gnmi_path_generator(itc_entry)
+            intent_path = gnmi_path_generator(itc_entry['path'])
 
-            intent_config = json.dumps({'config': {'enabled': True, 'type': 'iana-if-type:ethernetCsmacd', 'description': 'ABC'}}).encode('utf-8')
+            intent_config = json.dumps(itc_entry['data']).encode('utf-8')
 
-            gnmi_update_message = Update(path=intent_path, val=TypedValue(json_val=intent_config))
-            gnmi_message_request = SetRequest(update=[gnmi_update_message])
-            gnmi_message_response = gnmi_interface.Set(gnmi_message_request, metadata=metadata)
+            gnmi_update_message.append(Update(path=intent_path, val=TypedValue(json_val=intent_config)))
 
-            print(gnmi_message_response)
+        gnmi_message_request = SetRequest(update=gnmi_update_message)
+        gnmi_message_response = gnmi_interface.Set(gnmi_message_request, metadata=metadata)
+
+        print(gnmi_message_response)

@@ -1,0 +1,11 @@
+{
+    "network_functions": [
+        {
+            "hostname": "EOS4240",
+            "ip_address": "192.168.100.62",
+            "port": 6030,
+            "username": "aaa",
+            "password": "aaa"
+        }
+    ]
+}

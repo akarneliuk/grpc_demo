@@ -13,6 +13,9 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.3.1`:
+- Modified the structure of the files so that inventory are moved to a directory `inventory`, which has subfolder `network_functions` with per device data.
+
 Release `0.3.0`:
 - The file `act_gnmi.py` is renamed to `get_gnmi.py`.
 - The new file `set_gnmi.py` is created to perform the configuration of the network elements via gRPC transport with gNMI specification and OpenConfig YANG modules.

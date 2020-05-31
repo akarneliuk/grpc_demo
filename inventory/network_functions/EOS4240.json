@@ -1,0 +1,78 @@
+{
+    "intent_config": [
+        {
+            "path": "openconfig-interfaces:interfaces/interface[name=Ethernet1]",
+            "data": {
+                "name": "Ethernet1",
+                "config": {
+                    "name": "Ethernet1",
+                    "enabled": true,
+                    "type": "iana-if-type:ethernetCsmacd",
+                    "description": "Test IF 1"
+                },
+                "subinterfaces": {
+                    "subinterface": [
+                        {
+                            "index": 0,
+                            "config": {
+                                "index": 0,
+                                "enabled": true
+                            },
+                            "openconfig-if-ip:ipv4": {
+                                "addresses": {
+                                    "address": [
+                                        {
+                                            "ip": "10.0.0.0",
+                                            "config": {
+                                                 "ip": "10.0.0.0",
+                                                 "prefix-length": 31,
+                                                 "addr-type": "PRIMARY"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "path": "openconfig-interfaces:interfaces/interface[name=Loopback1]",
+            "data": {
+                "name": "Loopback1",
+                "config": {
+                    "name": "Loopback1",
+                    "enabled": true, 
+                    "type": "iana-if-type:softwareLoopback",
+                    "description": "Test IF 2"
+                },
+                "subinterfaces": {
+                    "subinterface": [
+                        {
+                            "index": 0,
+                            "config": {
+                                "index": 0,
+                                "enabled": true
+                            },
+                            "openconfig-if-ip:ipv4": {
+                                "addresses": {
+                                    "address": [
+                                        {
+                                            "ip": "10.1.255.62",
+                                            "config": {
+                                                 "ip": "10.1.255.62",
+                                                 "prefix-length": 32,
+                                                 "addr-type": "PRIMARY"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
