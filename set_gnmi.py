@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         device_data = json_to_dict(f'{path["network_functions"]}/{td_entry["hostname"]}.json')
 
-        gnmi_update_message = []
+        gnmi_message = []
         for itc_entry in device_data['intent_config']:
             print(f'Setting data for the {itc_entry} data from {td_entry["ip_address"]} over gNMI...\n\n')
 
@@ -63,9 +63,9 @@ if __name__ == '__main__':
 
             intent_config = json.dumps(itc_entry['data']).encode('utf-8')
 
-            gnmi_update_message.append(Update(path=intent_path, val=TypedValue(json_val=intent_config)))
+            gnmi_message.append(Update(path=intent_path, val=TypedValue(json_val=intent_config)))
 
-        gnmi_message_request = SetRequest(update=gnmi_update_message)
+        gnmi_message_request = SetRequest(update=gnmi_message)
         gnmi_message_response = gnmi_interface.Set(gnmi_message_request, metadata=metadata)
 
         print(gnmi_message_response)

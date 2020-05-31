@@ -13,6 +13,9 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.3.2`:
+- The `get_gnmi.py` is modified per `set_gnmi.py` structure.
+
 Release `0.3.1`:
 - Modified the structure of the files so that inventory are moved to a directory `inventory`, which has subfolder `network_functions` with per device data.
 

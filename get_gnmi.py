@@ -10,24 +10,15 @@ import json
 
 
 # Variables
-info_to_collect = ['openconfig-interfaces:interfaces/interface[name=Ethernet2]']
-target_devices = [
-                    {
-                        'ip_address': '192.168.100.62',
-                        'port': 6030,
-                        'username': 'aaa',
-                        'password': 'aaa'
-                    },
-                    {
-                        'ip_address': '192.168.100.64',
-                        'port': 57400,
-                        'username': 'admin',
-                        'password': 'admin'
-                    }
-                 ]
+path = {'inventory': 'inventory/inventory.json', 'network_functions': 'inventory/network_functions'}
 
 
 # User-defined functions
+def json_to_dict(path):
+    with open(path, 'r') as f:
+        return json.loads(f.read())
+
+
 def gnmi_path_generator(path_in_question):
     gnmi_path = Path()
 
@@ -52,7 +43,9 @@ def gnmi_path_generator(path_in_question):
 
 # Body
 if __name__ == '__main__':
-    for td_entry in target_devices:
+    inventory = json_to_dict(path['inventory']) 
+
+    for td_entry in inventory['network_functions']:
         metadata = [('username', td_entry['username']), ('password', td_entry['password'])]
 
         grpc_connection = grpc.insecure_channel(f'{td_entry["ip_address"]}:{td_entry["port"]}', metadata)
@@ -60,13 +53,17 @@ if __name__ == '__main__':
 
         gnmi_interface = gNMIStub(grpc_connection)
 
-        for itc_entry in info_to_collect:
-            print(f'Collecting the {itc_entry} data from {td_entry["ip_address"]} over gNMI...\n\n')
+        device_data = json_to_dict(f'{path["network_functions"]}/{td_entry["hostname"]}.json')
 
-            intent_path = gnmi_path_generator(itc_entry)
+        gnmi_message = []
+        for itc_entry in device_data['intent_config']:
+            print(f'Setting data for the {itc_entry} data from {td_entry["ip_address"]} over gNMI...\n\n')
 
-            gnmi_message_request = GetRequest(path=[intent_path], type=0, encoding=0)
-            gnmi_message_response = collected_data = gnmi_interface.Get(gnmi_message_request, metadata=metadata)
+            intent_path = gnmi_path_generator(itc_entry['path'])
 
-            print(gnmi_message_response)
+            gnmi_message.append(intent_path)
 
+        gnmi_message_request = GetRequest(path=gnmi_message, type=0, encoding=0)
+        gnmi_message_response = gnmi_interface.Get(gnmi_message_request, metadata=metadata)
+
+        print(gnmi_message_response)
