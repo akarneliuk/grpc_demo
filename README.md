@@ -13,6 +13,9 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.3.5`:
+- Function `gnmi_path_generator` is moved into a separate file `bin/PathGenerator.py`. The `get_gnmi.py` and `set_gnmi.py` are importing it now.
+
 Release `0.3.4`:
 - Fixed the bug with inabbility to provide in the path the key, which contains `/` symbol.
 
