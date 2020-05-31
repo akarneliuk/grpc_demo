@@ -7,6 +7,9 @@ from bin.gnmi_pb2 import *
 import re
 import sys
 import json
+
+
+# Own modules
 from bin.PathGenerator import gnmi_path_generator
 
 

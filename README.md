@@ -13,6 +13,10 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.3.6`:
+- Nokia data `inventory/network_functions/SR205R1.json` is extended with the OpenConfig YANG data for `openconfig-network-instance`.
+- Minor bug fixing.
+
 Release `0.3.5`:
 - Function `gnmi_path_generator` is moved into a separate file `bin/PathGenerator.py`. The `get_gnmi.py` and `set_gnmi.py` are importing it now.
 

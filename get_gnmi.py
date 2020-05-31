@@ -7,6 +7,9 @@ from bin.gnmi_pb2 import *
 import re
 import sys
 import json
+
+
+# Own modules
 from bin.PathGenerator import gnmi_path_generator
 
 
@@ -18,6 +21,7 @@ path = {'inventory': 'inventory/inventory.json', 'network_functions': 'inventory
 def json_to_dict(path):
     with open(path, 'r') as f:
         return json.loads(f.read())
+
 
 # Body
 if __name__ == '__main__':

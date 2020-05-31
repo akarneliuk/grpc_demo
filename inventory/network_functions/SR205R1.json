@@ -7,7 +7,7 @@
                 "config": {
                     "name": "1/1/c1/1",
                     "enabled": true,
-                    "type": "iana-if-type:ethernetCsmacd",
+                    "type": "ethernetCsmacd",
                     "description": "Test IF 1"
                 },
                 "subinterfaces": {
@@ -18,7 +18,7 @@
                                 "index": 0,
                                 "enabled": true
                             },
-                            "openconfig-if-ip:ipv4": {
+                            "ipv4": {
                                 "addresses": {
                                     "address": [
                                         {
@@ -43,7 +43,7 @@
                 "config": {
                     "name": "system",
                     "enabled": true, 
-                    "type": "iana-if-type:softwareLoopback",
+                    "type": "softwareLoopback",
                     "description": "Test IF 2"
                 },
                 "subinterfaces": {
@@ -54,7 +54,7 @@
                                 "index": 0,
                                 "enabled": true
                             },
-                            "openconfig-if-ip:ipv4": {
+                            "ipv4": {
                                 "addresses": {
                                     "address": [
                                         {
@@ -68,6 +68,42 @@
                                 }
                             }
                         }
+                    ]
+                }
+            }
+        },
+        {
+            "path": "openconfig-network-instance:network-instances/network-instance[name=Base]",
+            "data": {
+                "name": "Base",
+                "config": {
+                    "name": "Base",
+                    "type": "DEFAULT_INSTANCE"
+                },
+                "interfaces": {
+                    "interface": [
+                        {
+                            "id": "1/1/c1/1.0",
+                            "config": {
+                                "associated-address-families": [
+                                    "IPV4"
+                                ], 
+                            "id": "1/1/c1/1.0", 
+                            "interface": "1/1/c1/1", 
+                            "subinterface": 0
+                            }
+                        },
+                        {
+                            "id": "system.0",
+                            "config": {
+                                "associated-address-families": [
+                                    "IPV4"
+                                ], 
+                            "id": "system.0", 
+                            "interface": "system", 
+                            "subinterface": 0
+                            }
+                        }  
                     ]
                 }
             }
