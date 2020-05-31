@@ -21,6 +21,15 @@ def json_to_dict(path):
 
 def gnmi_path_generator(path_in_question):
     gnmi_path = Path()
+    keys = []
+
+    while re.match('.*?\[.+?=.+?\].*?', path_in_question):
+        temp_key, temp_value = re.sub('.*?\[(.+?)\].*?', '\g<1>', path_in_question).split('=')
+        keys.append({temp_key: temp_value})
+        path_in_question = re.sub('(.*?\[).+?(\].*?)', f'\g<1>{len(keys) - 1}\g<2>', path_in_question)
+
+    print(keys)
+    print(path_in_question)
 
     path_elements = path_in_question.split('/')
 
@@ -32,8 +41,9 @@ def gnmi_path_generator(path_in_question):
             gnmi_path.origin = pe_entry.split(':')[0]
             gnmi_path.elem.add(name=pe_entry.split(':')[1])
 
-        elif re.match('.+?\[.+?\]', pe_entry):
-            gnmi_path.elem.add(name=pe_entry.split('[')[0], key={f'{pe_entry.split("[")[1].split("=")[0]}': f'{re.sub("]", "", pe_entry.split("[")[1].split("=")[1])}'})
+        elif re.match('.+?\[\d+?\].*?', pe_entry):
+            key_id = int(re.sub('.+?\[(\d+?)\].*?', '\g<1>', pe_entry))
+            gnmi_path.elem.add(name=pe_entry.split('[')[0], key=keys[key_id])
 
         else:
             gnmi_path.elem.add(name=pe_entry)

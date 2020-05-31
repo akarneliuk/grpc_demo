@@ -1,7 +1,7 @@
 {
     "intent_config": [
         {
-            "path": "openconfig-interfaces:interfaces"
+            "path": "openconfig-interfaces:interfaces/interface[name=1/1/c1/1]"
         }
     ]
 }
