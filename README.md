@@ -13,6 +13,9 @@ The explanation of the demo:
 4. Parse the Protobuf message using Python 3: `python read_protobuf.py oc_if.bin`
 
 ## Log
+Release `0.3.3`:
+- Nokia SR OS is added back to inventory.
+
 Release `0.3.2`:
 - The `get_gnmi.py` is modified per `set_gnmi.py` structure.
 

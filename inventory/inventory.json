@@ -2,10 +2,17 @@
     "network_functions": [
         {
             "hostname": "EOS4240",
-            "ip_address": "192.168.100.62",
+            "ip_address": "169.254.255.62",
             "port": 6030,
             "username": "aaa",
             "password": "aaa"
+        },
+        {
+            "hostname": "SR205R1",
+            "ip_address": "169.254.255.64",
+            "port": 57400,
+            "username": "admin",
+            "password": "admin"
         }
     ]
 }
