@@ -38,11 +38,11 @@
             }
         },
         {
-            "path": "openconfig-interfaces:interfaces/interface[name=Loopback1]",
+            "path": "openconfig-interfaces:interfaces/interface[name=Loopback0]",
             "data": {
-                "name": "Loopback1",
+                "name": "Loopback0",
                 "config": {
-                    "name": "Loopback1",
+                    "name": "Loopback0",
                     "enabled": true, 
                     "type": "iana-if-type:softwareLoopback",
                     "description": "Test IF 2"

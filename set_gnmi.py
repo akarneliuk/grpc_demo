@@ -30,10 +30,10 @@ if __name__ == '__main__':
     for td_entry in inventory['network_functions']:
         metadata = [('username', td_entry['username']), ('password', td_entry['password'])]
 
-        grpc_connection = grpc.insecure_channel(f'{td_entry["ip_address"]}:{td_entry["port"]}', metadata)
-        grpc.channel_ready_future(grpc_connection).result(timeout=5)
+        channel = grpc.insecure_channel(f'{td_entry["ip_address"]}:{td_entry["port"]}', metadata)
+        grpc.channel_ready_future(channel).result(timeout=5)
 
-        gnmi_interface = gNMIStub(grpc_connection)
+        stub = gNMIStub(channel)
 
         device_data = json_to_dict(f'{path["network_functions"]}/{td_entry["hostname"]}.json')
 
@@ -48,6 +48,6 @@ if __name__ == '__main__':
             gnmi_message.append(Update(path=intent_path, val=TypedValue(json_val=intent_config)))
 
         gnmi_message_request = SetRequest(update=gnmi_message)
-        gnmi_message_response = gnmi_interface.Set(gnmi_message_request, metadata=metadata)
+        gnmi_message_response = stub.Set(gnmi_message_request, metadata=metadata)
 
         print(gnmi_message_response)

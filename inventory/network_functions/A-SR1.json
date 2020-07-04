@@ -1,42 +1,6 @@
 {
     "intent_config": [
         {
-            "path": "openconfig-interfaces:interfaces/interface[name=1/1/c1/1]",
-            "data": {
-                "name": "1/1/c1/1",
-                "config": {
-                    "name": "1/1/c1/1",
-                    "enabled": true,
-                    "type": "ethernetCsmacd",
-                    "description": "Test IF 1"
-                },
-                "subinterfaces": {
-                    "subinterface": [
-                        {
-                            "index": 0,
-                            "config": {
-                                "index": 0,
-                                "enabled": true
-                            },
-                            "ipv4": {
-                                "addresses": {
-                                    "address": [
-                                        {
-                                            "ip": "10.0.0.1",
-                                            "config": {
-                                                 "ip": "10.0.0.1",
-                                                 "prefix-length": 31
-                                            }
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        {
             "path": "openconfig-interfaces:interfaces/interface[name=system]",
             "data": {
                 "name": "system",
@@ -62,6 +26,42 @@
                                             "config": {
                                                  "ip": "10.1.255.64",
                                                  "prefix-length": 32
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "path": "openconfig-interfaces:interfaces/interface[name=1/1/c1/1]",
+            "data": {
+                "name": "1/1/c1/1",
+                "config": {
+                    "name": "1/1/c1/1",
+                    "enabled": true,
+                    "type": "ethernetCsmacd",
+                    "description": "Test IF 1"
+                },
+                "subinterfaces": {
+                    "subinterface": [
+                        {
+                            "index": 0,
+                            "config": {
+                                "index": 0,
+                                "enabled": true
+                            },
+                            "ipv4": {
+                                "addresses": {
+                                    "address": [
+                                        {
+                                            "ip": "10.0.0.1",
+                                            "config": {
+                                                 "ip": "10.0.0.1",
+                                                 "prefix-length": 31
                                             }
                                         }
                                     ]
