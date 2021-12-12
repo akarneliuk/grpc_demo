@@ -37,6 +37,12 @@
             }
         },
         {
+            "path": "configure/port[port-id=1/1/c1]",
+            "data": {
+              "connector": { "breakout": "c1-100g" }
+            }
+        },
+        {
             "path": "openconfig-interfaces:interfaces/interface[name=1/1/c1/1]",
             "data": {
                 "name": "1/1/c1/1",
